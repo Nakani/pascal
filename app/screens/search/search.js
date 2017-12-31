@@ -1,14 +1,19 @@
+
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import MapView from 'react-native-maps';
+import { MapView } from 'expo';
 
 export class Search extends React.Component {
+
+
+
+  
   render() {
     return (
       <View style={styles.container}>
 
       <MapView style={styles.map}
-        region={{
+        initialRegion={{
           latitude: -30.034513, 
           longitude: -51.219322,
           latitudeDelta: 0.1,

@@ -1,0 +1,3 @@
+rootProject.name = 'pascal_app'
+
+include ':app'

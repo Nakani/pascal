@@ -4,7 +4,8 @@ import {
   Image,
   Button,
   Keyboard,
-  Platform
+  Platform,
+  Alert
 } from 'react-native';
 import {
   RkButton,
@@ -16,8 +17,10 @@ import {FontAwesome} from '../../assets/icons';
 import {RkTheme} from 'react-native-ui-kitten';
 import {scale, scaleModerate, scaleVertical} from '../../utils/scale';
 import { NavigationActions } from 'react-navigation';
+import { Constants, Facebook } from 'expo';
 
 export class Login extends React.Component {
+
   static navigationOptions = {
     header: null
   };
@@ -40,7 +43,86 @@ export class Login extends React.Component {
         );
     }
 
+ _handleFacebookLogin = async () => {
+    try {
+      const { type, token } = await Facebook.logInWithReadPermissionsAsync(
+        '1201211719949057', // Replace with your own app id in standalone app
+        { permissions: ['public_profile'] }
+      );
 
+      switch (type) {
+        case 'success': {
+          // Get the user's name using Facebook's Graph API
+          const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
+          const profile = await response.json();
+          Alert.alert(
+            'Logado com sucesso!',
+            `Olá ${profile.name}!`,
+          );
+          this.login();
+          break;
+        }
+        case 'cancel': {
+          Alert.alert(
+            'Cancelado!',
+            'Seu login foi Cancelado!',
+          );
+          break;
+        }
+        default: {
+          Alert.alert(
+            'Oops!',
+            'Falha ao logar!',
+          );
+        }
+      }
+    } catch (e) {
+      Alert.alert(
+        'Oops!',
+        'falha ao logar!',
+      );
+    }
+  };
+
+  _handleGoogleLogin = async () => {
+    try {
+      const { type, user } = await Google.logInAsync({
+        androidStandaloneAppClientId: '<ANDROID_CLIENT_ID>',
+        iosStandaloneAppClientId: '<IOS_CLIENT_ID>',
+        androidClientId: '603386649315-9rbv8vmv2vvftetfbvlrbufcps1fajqf.apps.googleusercontent.com',
+        iosClientId: '603386649315-vp4revvrcgrcjme51ebuhbkbspl048l9.apps.googleusercontent.com',
+        scopes: ['profile', 'email']
+      });
+
+      switch (type) {
+        case 'success': {
+          Alert.alert(
+            'Logado com successo!',
+            `Olá ${user.name}!`,
+          );
+          break;
+        }
+        case 'cancel': {
+          Alert.alert(
+            'Cancelado!',
+            'Seu login foi cancelado!',
+          );
+          break;
+        }
+        default: {
+          Alert.alert(
+            'Oops!',
+            'Erro ao logar!',
+          );
+        }
+      }
+    } catch (e) {
+      Alert.alert(
+        'Oops!',
+        'Erro ao logar!',
+      );
+    }
+  };
 
 
   render() {
@@ -55,29 +137,28 @@ export class Login extends React.Component {
           <Image style={styles.image} source={require('../../assets/images/logoPascal.png')}/>
           <RkText rkType='logo h0'>Pascal</RkText>
         </View>
-        <View style={styles.content}>
+        <View style={styles.content}>        
+          <View style={styles.buttons}>
+{/*            <RkButton style={styles.button} rkType='social'>
+              <RkText rkType='awesome hero'>{FontAwesome.twitter}</RkText>
+            </RkButton>*/}
+            <RkButton style={styles.button} rkType='social' onPress={this._handleGoogleLogin}>
+              <RkText rkType='awesome hero'>{FontAwesome.google}</RkText>
+            </RkButton>
+            <RkButton style={styles.button} rkType='social' onPress={this._handleFacebookLogin}>
+              <RkText rkType='awesome hero'>{FontAwesome.facebook}</RkText>
+            </RkButton>
+          </View>
           <View>
             <RkTextInput rkType='rounded' placeholder='Nome'/>
             <RkTextInput rkType='rounded' placeholder='Senha' secureTextEntry={true}/>
             <Button style={styles.buttonSimples}
               onPress={() => this.login()}
               title="Entrar"
-              rkType='large'
-              
-              
+              rkType='large'            
               />       
           </View>
-          <View style={styles.buttons}>
-            <RkButton style={styles.button} rkType='social'>
-              <RkText rkType='awesome hero'>{FontAwesome.twitter}</RkText>
-            </RkButton>
-            <RkButton style={styles.button} rkType='social'>
-              <RkText rkType='awesome hero'>{FontAwesome.google}</RkText>
-            </RkButton>
-            <RkButton style={styles.button} rkType='social'>
-              <RkText rkType='awesome hero'>{FontAwesome.facebook}</RkText>
-            </RkButton>
-          </View>
+
 
 
         </View>
