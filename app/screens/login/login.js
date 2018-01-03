@@ -150,8 +150,7 @@ export class Login extends React.Component {
             </RkButton>
           </View>
           <View>
-            <RkTextInput rkType='rounded' placeholder='Nome'/>
-            <RkTextInput rkType='rounded' placeholder='Senha' secureTextEntry={true}/>
+
             <Button style={styles.buttonSimples}
               onPress={() => this.login()}
               title="Entrar"

@@ -10,12 +10,14 @@ import * as Screens from './screens';
 import { Font } from 'expo';
 import {StatusBar} from "react-native";
 import { Ionicons } from '@expo/vector-icons';
+import {data} from './data';
 
 
 import { Platform } from 'react-native';
 
 
 bootstrap();
+//data.createSQLite();
 
 function getCurrentRouteName(navigationState) {
     if (!navigationState) {
@@ -42,6 +44,7 @@ const PascalApp = StackNavigator({
   First: {
     screen: Screens.Login
   },
+
   Home: {
     screen: TabNavigator({
         ...AppRoutes,

@@ -1,6 +1,5 @@
-import Realm from 'realm';
 
-export class User extends Realm.Object { }
+export class User { }
 User.schema = {
   name: 'User',
   primaryKey: 'id',
@@ -11,18 +10,11 @@ User.schema = {
     phone: {type: 'string'},
     country: {type: 'string'},
     email: {type: 'string'},
-    password: {type: 'string'},
-    newPassword: {type: 'string'},
-    confirmPassword: {type: 'string'},
-    photo: {type: 'int'},
-    postCount: {type: 'int'},
-    followersCount: {type: 'int'},
-    followingCount: {type: 'int'},
-    images: {type: 'list', objectType: 'Photo'}
+    password: {type: 'string'}
   }
 };
 
-export class Article extends Realm.Object { }
+export class Article { }
 Article.schema = {
   name: 'Article',
   primaryKey: 'id',
@@ -38,7 +30,7 @@ Article.schema = {
   }
 };
 
-export class Comment extends Realm.Object { }
+export class Comment { }
 Comment.schema = {
   name: 'Comment',
   primaryKey: 'id',
@@ -50,7 +42,7 @@ Comment.schema = {
   }
 };
 
-export class Notification extends Realm.Object { }
+export class Notification { }
 Notification.schema = {
   name: 'Notification',
   primaryKey: 'id',
@@ -64,7 +56,7 @@ Notification.schema = {
   }
 };
 
-export class Conversation extends Realm.Object { }
+export class Conversation { }
 Conversation.schema = {
   name: 'Conversation',
   properties: {
@@ -73,7 +65,7 @@ Conversation.schema = {
   }
 };
 
-export class Message extends Realm.Object { }
+export class Message { }
 Message.schema = {
   name: 'Message',
   properties: {
@@ -84,7 +76,7 @@ Message.schema = {
   }
 };
 
-export class Photo extends Realm.Object { }
+export class Photo { }
 Photo.schema = {
   name: 'Photo',
   properties: {
@@ -92,7 +84,7 @@ Photo.schema = {
   }
 };
 
-export class Card extends Realm.Object { }
+export class Card { }
 Card.schema = {
   name: 'Card',
   primaryKey: 'id',
@@ -108,7 +100,7 @@ Card.schema = {
   }
 };
 
-export class Version extends Realm.Object { }
+export class Version { }
 Version.schema = {
   name: 'Version',
   properties: {
