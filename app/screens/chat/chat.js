@@ -54,10 +54,13 @@ export class Chat extends React.Component {
 
   constructor(props) {
     super(props);
-   let conversation = data.getConversation();
 
+   // HttpService.chatbot({lang:"pt-br",query:"oi",sessionId:"12345"});
+   let conversation = data.getConversation();
     this.state = {
-      data: conversation
+      data: conversation,
+      msgOut:''
+
     };
   }
 
@@ -72,6 +75,7 @@ export class Chat extends React.Component {
   }
 
   _renderItem(info) {
+
     let inMessage = info.item.type === 'in';
     let backgroundColor = inMessage
       ? RkTheme.current.colors.chat.messageInBackground
@@ -102,6 +106,41 @@ export class Chat extends React.Component {
     }
   }
 
+  async chatbot(question){
+    let chat = await new Promise((resolve) => {
+      HttpService.chatbot({lang:"pt-br",query:question,sessionId:"12345"}, function (result) {
+        if (result) {
+          resolve(result);
+        } else {
+          resolve(false);
+        }
+        }, function (error) {
+          resolve(false);
+        });
+    });
+    if(chat){
+    let msgOut = {
+      id: chat.id,
+      time: 0,
+      type: 'in',
+      text: chat.result.fulfillment.speech
+    };
+    let data = this.state.data;
+      data.messages.push(msgOut);
+
+    this.setState({
+      data,
+      message: ''
+    });
+    this._scroll(true);
+    }else{
+      alert('aqui');
+    }
+
+
+  }
+
+
   _pushMessage() {
     if (!this.state.message)
       return;
@@ -112,16 +151,16 @@ export class Chat extends React.Component {
       text: this.state.message
     };
 
-
     let data = this.state.data;
       data.messages.push(msg);
-
 
     this.setState({
       data,
       message: ''
     });
     this._scroll(true);
+    this.chatbot(this.state.message);
+
   }
 
   render() {

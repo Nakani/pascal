@@ -57,7 +57,7 @@ let HttpService = {
                 body: body
             }).then((response) => response.json()).then((responseJson) => {
                 if (callbackSuccess && typeof(callbackSuccess) === "function"){
-                    console.log(responseJson, params, headers);
+                    //console.log(responseJson, params, headers);
                     callbackSuccess(responseJson);
                 }
             }).catch((error) => {
@@ -71,11 +71,33 @@ let HttpService = {
         }
     },
 
-    chatbot: function(){
-        fetch('http://pascal-app.herokuapp.com/api/chatbot')  
-          .then(function(response) {
-            return response.json()
-          })
+    chatbot: function(params = {},callbackSuccess, callbackError){
+        try {
+            let url = 'https://api.dialogflow.com/v1/query?v=20150910';
+            let headers = {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',};
+            headers.Authorization = "Bearer 3d1cc3d890cd4720a6d4448c3b8d60d4";
+            var body = JSON.stringify(params);
+            console.log(body);
+            fetch(url, {
+                method: 'POST',
+                headers: headers,
+                body: body
+            }).then((response) => response.json()).then((responseJson) => {
+                if (callbackSuccess && typeof(callbackSuccess) === "function"){
+                    //console.log(responseJson.result.fulfillment.speech);
+                    callbackSuccess(responseJson);
+                }
+            }).catch((error) => {
+                console.log(url, headers, body);
+                throw error;
+            });
+        }catch(e){
+            if (callbackError && typeof(callbackError) === "function"){
+                callbackError(e);
+            }
+        }
     }
 
 };
