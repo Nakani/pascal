@@ -13,7 +13,8 @@ export const MainRoutes = {
         screen: Screens.Chat
     }, 
     Ajustes: {
-        screen: Screens.Settings
+        screen: Screens.Ajustes
     },    
+   
 };
 

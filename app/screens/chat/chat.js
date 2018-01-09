@@ -4,6 +4,7 @@ import {
   View,
   Platform,
   Image,
+  Text,
   TouchableOpacity,
   Keyboard,
 
@@ -23,6 +24,7 @@ import {Avatar} from '../../components/avatar';
 import {scale} from '../../utils/scale';
 import {data} from '../../data';
 import HttpService from "../../utils/http";
+
 let moment = require('moment');
 
 let getUserId = (navigation) => {
@@ -54,12 +56,13 @@ export class Chat extends React.Component {
 
   constructor(props) {
     super(props);
+ 
 
-   // HttpService.chatbot({lang:"pt-br",query:"oi",sessionId:"12345"});
-   let conversation = data.getConversation();
+ 
+    let conversation = data.getConversation();
     this.state = {
       data: conversation,
-      msgOut:''
+      digitando: ''
 
     };
   }
@@ -107,6 +110,7 @@ export class Chat extends React.Component {
   }
 
   async chatbot(question){
+    this.setState({digitando: 'Pascal'});
     let chat = await new Promise((resolve) => {
       HttpService.chatbot({lang:"pt-br",query:question,sessionId:"12345"}, function (result) {
         if (result) {
@@ -119,27 +123,42 @@ export class Chat extends React.Component {
         });
     });
     if(chat){
+      console.log(chat);
+      var filter = chat.result.metadata.intentName;
+      var filterClean = filter.split("-");
+      switch(filterClean[1]){
+        case "banho":
+          console.log('legal banho');
+          break;
+        default:
+        console.log('padrao');
+      }
+
     let msgOut = {
       id: chat.id,
       time: 0,
       type: 'in',
-      text: chat.result.fulfillment.speech
+      text: chat.result.fulfillment.messages[0].speech
     };
     let data = this.state.data;
       data.messages.push(msgOut);
+    this.setState({digitando: ''});
 
     this.setState({
       data,
       message: ''
     });
-    this._scroll(true);
-    }else{
-      alert('aqui');
+    this._scroll(false);
     }
-
-
   }
 
+  renderDigitando(){
+      let digitando =(<View>
+           <Text>{this.state.digitando} está digitando...</Text>
+      </View>);
+
+      return digitando;
+  }
 
   _pushMessage() {
     if (!this.state.message)
@@ -158,22 +177,30 @@ export class Chat extends React.Component {
       data,
       message: ''
     });
-    this._scroll(true);
+    this._scroll(false);
     this.chatbot(this.state.message);
 
   }
 
   render() {
     return (
+
+
       <RkAvoidKeyboard style={styles.container} onResponderRelease={(event) => {
         Keyboard.dismiss();
-      }}>
+      }}>      
+        <View style={styles.header}>
+          <TouchableOpacity >
+
+          </TouchableOpacity>
+          </View>
         <FlatList ref='list'
                   extraData={this.state}
                   style={styles.list}
                   data={this.state.data.messages}
                   keyExtractor={this._keyExtractor}
                   renderItem={this._renderItem}/>
+                  {this.state.digitando!=='' && this.renderDigitando()}
         <View style={styles.footer}>
           <RkButton style={styles.plus} rkType='clear'>
             <RkText rkType='awesome secondaryColor'>{FontAwesome.plus}</RkText>
@@ -193,13 +220,17 @@ export class Chat extends React.Component {
         </View>
       </RkAvoidKeyboard>
 
+
     )
   }
 }
 
 let styles = RkStyleSheet.create(theme => ({
   header: {
-    alignItems: 'center'
+    alignItems: 'center',
+    height:(Platform.OS === 'ios') ? 20 : 50,
+    paddingTop:(Platform.OS === 'ios') ? 20 : 0,
+    paddingHorizontal: 20,
   },
   avatar: {
     marginRight: 16,

@@ -5,6 +5,8 @@ import {
   Button,
   Keyboard,
   Platform,
+  AsyncStorage,
+  Text,
   Alert
 } from 'react-native';
 import {
@@ -17,9 +19,14 @@ import {FontAwesome} from '../../assets/icons';
 import {RkTheme} from 'react-native-ui-kitten';
 import {scale, scaleModerate, scaleVertical} from '../../utils/scale';
 import { NavigationActions } from 'react-navigation';
-import { Constants, Facebook } from 'expo';
+import { Constants, Facebook, LinearGradient} from 'expo';
 
 export class Login extends React.Component {
+
+  state = {
+    dados: [],
+  };
+
 
   static navigationOptions = {
     header: null
@@ -46,20 +53,30 @@ export class Login extends React.Component {
  _handleFacebookLogin = async () => {
     try {
       const { type, token } = await Facebook.logInWithReadPermissionsAsync(
-        '1201211719949057', // Replace with your own app id in standalone app
+        '346050695870285', 
         { permissions: ['public_profile'] }
       );
 
       switch (type) {
         case 'success': {
           // Get the user's name using Facebook's Graph API
-          const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
+          const response = await fetch(
+              `https://graph.facebook.com/me?access_token=${token}&fields=id,name,email,picture.type(large)`);
           const profile = await response.json();
+          try {
+          await AsyncStorage.setItem('@user:dados', JSON.stringify(profile));
+          this.login();
+          } catch (error) {
+          console.log('erro ao salvar');
+          }
+
+
+
           Alert.alert(
             'Logado com sucesso!',
             `Olá ${profile.name}!`,
           );
-          this.login();
+          // this.login();
           break;
         }
         case 'cancel': {
@@ -127,7 +144,6 @@ export class Login extends React.Component {
 
   render() {
 
-
     return (
       <RkAvoidKeyboard
         style={styles.screen}
@@ -150,6 +166,15 @@ export class Login extends React.Component {
             </RkButton>
           </View>
           <View>
+{/*            <LinearGradient
+              colors={['#FFC313', '#FFC313']}
+              style={styles.buttonSimples}
+              onPress={() => this.login()} >
+              <Text style={{ color: '#fff', backgroundColor: 'transparent' }}>
+                Entrar!
+              </Text>
+            </LinearGradient>*/}
+
 
             <Button style={styles.buttonSimples}
               onPress={() => this.login()}
@@ -191,9 +216,16 @@ let styles = RkStyleSheet.create(theme => ({
   },
 
   buttonSimples: {
-    color: '#FFC11A',
+    backgroundColor: '#fff',
+    height: 48, 
+    width: 200, 
+    alignItems: 'center', 
+    justifyContent: 'center', 
     borderRadius: 5,
-    borderColor: '#000000',
+    marginBottom: 19,
+    marginLeft: 50,
+    marginRight: 50,
+    marginTop: 19,
   },
 
   buttons: {

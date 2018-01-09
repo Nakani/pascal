@@ -1,3 +1,17 @@
+import * as firebase from 'firebase';
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyB2-vLuG-sCW2DPAcls04ltwBxNv8sUc_k",
+  authDomain: "pascal-37098.firebaseapp.com",
+  databaseURL: "https://pascal-37098.firebaseio.com",
+  projectId: "pascal-37098",
+  storageBucket: "pascal-37098.appspot.com",
+  messagingSenderId: "22142406102"
+};
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+
+
 
 let HttpService = {
 
@@ -77,7 +91,7 @@ let HttpService = {
             let headers = {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',};
-            headers.Authorization = "Bearer 3d1cc3d890cd4720a6d4448c3b8d60d4";
+            headers.Authorization = "Bearer 9b8652c7edd8435c9e7efd62d9d75293";
             var body = JSON.stringify(params);
             console.log(body);
             fetch(url, {
@@ -86,7 +100,7 @@ let HttpService = {
                 body: body
             }).then((response) => response.json()).then((responseJson) => {
                 if (callbackSuccess && typeof(callbackSuccess) === "function"){
-                    //console.log(responseJson.result.fulfillment.speech);
+                    //console.log(responseJson);
                     callbackSuccess(responseJson);
                 }
             }).catch((error) => {
@@ -98,7 +112,36 @@ let HttpService = {
                 callbackError(e);
             }
         }
+    },
+
+    getFirebase:function(endpoint, callbackSuccess, callbackError){
+        // console.log('aqui');
+        try {
+            let url = 'https://pascal-37098.firebaseio.com/' + endpoint;
+            let headers = {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',};
+            console.log(body);
+            fetch(url, {
+                method: 'GET',
+                headers: headers,
+            }).then((response) => response.json()).then((responseJson) => {
+                if (callbackSuccess && typeof(callbackSuccess) === "function"){
+                    console.log(responseJson);
+                    callbackSuccess(responseJson);
+                }
+            }).catch((error) => {
+                console.log(url);
+                throw error;
+            });
+        }catch(e){
+            if (callbackError && typeof(callbackError) === "function"){
+                callbackError(e);
+            }
+        }
+
     }
+
 
 };
 

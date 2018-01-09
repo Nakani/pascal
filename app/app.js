@@ -30,20 +30,13 @@ function getCurrentRouteName(navigationState) {
     return route.routeName;
 }
 
-// const PascalApp = TabNavigator({
-//       ...AppRoutes
-//     }, 
-//     {
-//     headerMode: 'screen',
-//     cardStyle: {
-//         paddingTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight
-//     }
-// });
-
 const PascalApp = StackNavigator({
   First: {
     screen: Screens.Login
   },
+  Perfil: {
+        screen: Screens.Perfil
+    }, 
 
   Home: {
     screen: TabNavigator({
@@ -87,7 +80,7 @@ const PascalApp = StackNavigator({
         tabBarComponent: TabBarBottom,
         tabBarPosition: 'bottom',
         animationEnabled: true,
-        swipeEnabled: true,
+        swipeEnabled: false,
 
 
       })
@@ -95,11 +88,6 @@ const PascalApp = StackNavigator({
 }, {
   headerMode: 'none',
 });
-
-
-
-
-
 const defaultGetStateForAction = PascalApp.router.getStateForAction;
 PascalApp.router.getStateForAction = (action, state) => {
         if(state && action.type === 'ReplaceCurrentScreen'){

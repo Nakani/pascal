@@ -1,11 +1,31 @@
 
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import HttpService from "../../utils/http";
 import { MapView } from 'expo';
 
 export class Search extends React.Component {
 
+  constructor(props) {
+    super(props);
 
+    this.getPoints();
+
+  }
+
+  async getPoints(){
+    let points = await new Promise((resolve) => {
+      HttpService.getFirebase('parceiros.json', function (result) {
+        if (result) {
+          resolve(result);
+        } else {
+          resolve(false);
+        }
+        }, function (error) {
+          resolve(false);
+        });
+    });
+  }  
 
   
   render() {
