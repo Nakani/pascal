@@ -1,11 +1,11 @@
 import conversations from './raw/conversations'
 import users from './raw/users'
 import articles from './raw/articles'
+import vouchers from './raw/cards'
 
 class DataProvider {
 
   getUser(id = 1) {
-  	console.log(users[0]);
     return users[0];
   }
 
@@ -16,6 +16,13 @@ class DataProvider {
  getArticles(type = 'article') {
     return articles[0];
   }
+
+ getCards() {
+     return vouchers[0];
+  }
+
+
+
 
 }
 

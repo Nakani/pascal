@@ -12,7 +12,6 @@ import {StatusBar} from "react-native";
 import { Ionicons } from '@expo/vector-icons';
 import {data} from './data';
 
-
 import { Platform } from 'react-native';
 
 
@@ -48,22 +47,22 @@ const PascalApp = StackNavigator({
             const { routeName } = navigation.state;
             let iconName;
             switch (routeName) {
-              case 'Home':
+              case 'Promo':
                 iconName =
                   Platform.OS === 'ios'
-                ? `ios-home${focused ? '' : '-outline'}`
-                : 'md-home';
+                ? `ios-cart${focused ? '' : '-outline'}`
+                : 'md-cart';
                 break;
-              case 'Buscar':
+              case 'Voucher':
                 iconName =
                   Platform.OS === 'ios'
-                    ? `ios-search${focused ? '' : '-outline'}`
-                    : 'md-search';
+                    ? `ios-cash${focused ? '' : '-outline'}`
+                    : 'md-cash';
                 break;
               case 'Chat':
                 iconName = Platform.OS === 'ios' ? `ios-chatbubbles${focused ? '' : '-outline'}` : 'md-chatbubbles';
                 break;
-              case 'Ajustes':
+              case 'Perfil':
                 iconName =
                   Platform.OS === 'ios' ? `ios-settings${focused ? '' : '-outline'}` : 'md-settings';
             }
@@ -76,7 +75,10 @@ const PascalApp = StackNavigator({
               />
             );
           },
-        }),
+
+        }
+
+        ),
         tabBarComponent: TabBarBottom,
         tabBarPosition: 'bottom',
         animationEnabled: true,
@@ -87,6 +89,10 @@ const PascalApp = StackNavigator({
   }
 }, {
   headerMode: 'none',
+  headerStyle: {
+  shadowOpacity: 0,
+  elevation: 0,
+  },
 });
 const defaultGetStateForAction = PascalApp.router.getStateForAction;
 PascalApp.router.getStateForAction = (action, state) => {
@@ -104,16 +110,22 @@ PascalApp.router.getStateForAction = (action, state) => {
     };
 
 export default class App extends React.Component{
+
+
     state = {
         fontLoaded: false,
         realm: null
     };
     async componentDidMount() {
+      StatusBar.setHidden(true);
         Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT);
         await Font.loadAsync({
             'Roboto-Regular': require('./assets/fonts/Roboto-Regular.ttf'),
             'Roboto-Bold': require('./assets/fonts/Roboto-Bold.ttf'),
             'Roboto-Light': require('./assets/fonts/Roboto-Light.ttf'),
+            'Roboto': require('native-base/Fonts/Roboto.ttf'),
+            'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
+            'Ionicons': require('@expo/vector-icons/fonts/Ionicons.ttf'),
             'fontawesome': require('./assets/fonts/fontawesome.ttf'),
         });
         this.setState({ fontLoaded: true });

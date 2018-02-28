@@ -24,6 +24,7 @@ import {Avatar} from '../../components/avatar';
 import {scale} from '../../utils/scale';
 import {data} from '../../data';
 import HttpService from "../../utils/http";
+import { Constants, LinearGradient } from 'expo';
 
 let moment = require('moment');
 
@@ -80,9 +81,14 @@ export class Chat extends React.Component {
   _renderItem(info) {
 
     let inMessage = info.item.type === 'in';
-    let backgroundColor = inMessage
-      ? RkTheme.current.colors.chat.messageInBackground
-      : RkTheme.current.colors.chat.messageOutBackground;
+    let styleBaloon = inMessage
+      ? styles.balloonIn
+      : styles.balloonOut;
+
+    let styleBalloonText = inMessage
+      ? styles.balloonTextIn
+      : styles.balloonTextOut;
+
     let itemStyle = inMessage ? styles.itemIn : styles.itemOut;
 
     let renderDate = (date) => (
@@ -93,8 +99,8 @@ export class Chat extends React.Component {
     return (
       <View style={[styles.item, itemStyle]}>
         {!inMessage && renderDate(info.item.date)}
-        <View style={[styles.balloon, {backgroundColor}]}>
-          <RkText rkType='primary2 mediumLine chat'>{info.item.text}</RkText>
+        <View style={[styleBaloon]}>
+          <RkText style={[styleBalloonText]} rkType='primary2 mediumLine chat'>{info.item.text}</RkText>
         </View>
         {inMessage && renderDate(info.item.date)}
       </View>
@@ -123,7 +129,7 @@ export class Chat extends React.Component {
         });
     });
     if(chat){
-      console.log(chat);
+      // console.log(chat);
       var filter = chat.result.metadata.intentName;
       var filterClean = filter.split("-");
       switch(filterClean[1]){
@@ -189,11 +195,17 @@ export class Chat extends React.Component {
       <RkAvoidKeyboard style={styles.container} onResponderRelease={(event) => {
         Keyboard.dismiss();
       }}>      
-        <View style={styles.header}>
-          <TouchableOpacity >
-
-          </TouchableOpacity>
+        <LinearGradient colors={['#FBB843','#FE7709']}
+                  start={{x: 0.0, y: 0.5}}
+                  end={{x: 1, y: 0.5}}
+                  >
+          <View style={styles.header}>
+            <Image style={styles.logoHeader} source={require('../../assets/icons/logoHeader.png')}/>
+            <Image style={styles.somHeader} source={require('../../assets/icons/somHeader.png')}/>
+            <Image style={styles.searchHeader} source={require('../../assets/icons/lupaHeader.png')}/>
           </View>
+        </LinearGradient>
+
         <FlatList ref='list'
                   extraData={this.state}
                   style={styles.list}
@@ -202,20 +214,17 @@ export class Chat extends React.Component {
                   renderItem={this._renderItem}/>
                   {this.state.digitando!=='' && this.renderDigitando()}
         <View style={styles.footer}>
-          <RkButton style={styles.plus} rkType='clear'>
-            <RkText rkType='awesome secondaryColor'>{FontAwesome.plus}</RkText>
-          </RkButton>
-
           <RkTextInput
             onFocus={() => this._scroll(true)}
             onBlur={() => this._scroll(true)}
             onChangeText={(message) => this.setState({message})}
             value={this.state.message}
             rkType='row sticker'
-            placeholder=" "/>
+            style = {styles.textInput}
+            placeholder="O que você Precisa?"/>
 
           <RkButton onPress={() => this._pushMessage()} style={styles.send} rkType='circle highlight'>
-            <Image source={require('../../assets/icons/sendIcon.png')}/>
+            <Image source={require('../../assets/icons/balao.png')}/>
           </RkButton>
         </View>
       </RkAvoidKeyboard>
@@ -226,27 +235,56 @@ export class Chat extends React.Component {
 }
 
 let styles = RkStyleSheet.create(theme => ({
-  header: {
-    alignItems: 'center',
-    height:(Platform.OS === 'ios') ? 20 : 50,
-    paddingTop:(Platform.OS === 'ios') ? 20 : 0,
-    paddingHorizontal: 20,
-  },
-  avatar: {
-    marginRight: 16,
-  },
+
   container: {
     flex: 1,
-    backgroundColor: theme.colors.screen.base
+    backgroundColor: theme.colors.screen.base,
+  },
+  header:{
+    height:(Platform.OS === 'ios') ? 70 : 50,
+    paddingTop:(Platform.OS === 'ios') ? 50 : 0,
+    justifyContent:'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems:'center',
+    paddingHorizontal: 20,
+  },
+
+  logoHeader: {
+    width: 20,
+    height: 10,
+
+  },
+  somHeader: {
+    width: 120,
+    height: 10,
+  },
+  searchHeader: {
+    width: 20,
+    height: 15,
+  },
+
+
+  
+  avatar: {
+    marginRight: 16,
   },
   list: {
     paddingHorizontal: 17
   },
+
+  textInput: {
+    backgroundColor: 'transparent',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: '#C4C4C4',
+  },
+
   footer: {
     flexDirection: 'row',
     minHeight: 60,
     padding: 10,
-    backgroundColor: theme.colors.screen.alter
+    backgroundColor: 'transparent'
   },
   item: {
     marginVertical: 14,
@@ -254,14 +292,36 @@ let styles = RkStyleSheet.create(theme => ({
     flexDirection: 'row'
   },
   itemIn: {},
+
   itemOut: {
     alignSelf: 'flex-end'
   },
-  balloon: {
+  imageButton:{
+    width: 70,
+    height: 90,
+  },
+  balloonIn: {
     maxWidth: scale(250),
     padding: 15,
     borderRadius: 20,
+    backgroundColor: '#c3c3c3',
   },
+  balloonOut: {
+    maxWidth: scale(250),
+    padding: 15,
+    backgroundColor: 'transparent',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: '#FFAB40',
+    borderTopRightRadius: 20,  
+  },
+  balloonTextIn: {
+    color: '#fff',
+  },
+  balloonTextOut: {
+    color: '#FFAB40',
+  },
+
   time: {
     alignSelf: 'flex-end',
     margin: 15
@@ -275,5 +335,6 @@ let styles = RkStyleSheet.create(theme => ({
     width: 40,
     height: 40,
     marginLeft: 10,
+    backgroundColor: '#FB911E',
   }
 }));

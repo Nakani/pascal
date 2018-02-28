@@ -1,88 +1,162 @@
 import React from 'react';
 import {
   FlatList,
-  View,
   Image,
-  TouchableOpacity,
-  StyleSheet,
-  ScrollView,
-  Text,
+  View,
+  Platform,
+  TouchableOpacity
 } from 'react-native';
 import {
-  RkCard, RkStyleSheet,
-  RkText
+  RkText,
+  RkCard, RkStyleSheet
 } from 'react-native-ui-kitten';
 import {data} from '../../data';
-let moment = require('moment');
+import { Constants, LinearGradient } from 'expo';
+import { FirebaseApp } from '../../utils/firebase-app';
+import { Container, Button, Text, Header, Left, Body, Title, Right, Icon, Content} from "native-base";
+
 
 export class Home extends React.Component {
 
 
+
+
   constructor(props) {
     super(props);
-
+    console.ignoredYellowBox = ['Setting a timer'];
+    this.db = FirebaseApp.database();
+    this.data = data.getArticles('fact');
+    this.promocoes = '';
     this.renderItem = this._renderItem.bind(this);
-    this.state = {
-      data: data.getArticles()
-
-    }
+    this.state =  {
+      speed: 10
+    };
   }
-  _keyExtractor(post, index) {
+
+  componentDidMount(){
+   let promo = this.db.ref('categorias-promocoes/');
+   console.log(promo.nome);
+  }
+
+  _keyExtractor(post) {
     return post.id;
   }
 
   _renderItem(info) {
-    console.log(info.item.photo);
     return (
       <TouchableOpacity
         delayPressIn={70}
         activeOpacity={0.8}
-        onPress={() => this.props.navigation.navigate('Article', {id: info.item.id})}>
-        <RkCard>
-          <View rkCardHeader style={styles.content}>
-            <RkText style={styles.section} rkType='header4'>{info.item.title}</RkText>
-          </View>
-          <Image rkCardImg source={{uri: 'https://firebasestorage.googleapis.com/v0/b/pascal-37098.appspot.com/o/images-app%2Fstranger-images%2Fphoto17.png?alt=media&token=6e905d24-b38f-4dfd-b555-e0c7b81dadd4'}}/>
+        onPress={() => this.props.navigation.navigate('Article', {id: info.item.id})}
+        >
+        <RkCard rkType='horizontal' style={styles.card}>
+          <Image rkCardImg source={info.item.photo}/>
+
           <View rkCardContent>
-            <RkText rkType='primary3 mediumLine' numberOfLines={2}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</RkText>
+            {/*<RkText numberOfLines={1} rkType='header6'>{this.state.speed}</RkText>*/}
+            <RkText numberOfLines={1} rkType='header6'>{info.item.header}</RkText>
+            <RkText rkType='secondary6 hintColor'>Pet Shop</RkText>
+            <RkText style={styles.post} numberOfLines={2} rkType='secondary1'>{info.item.text}</RkText>
           </View>
           <View rkCardFooter>
-           <RkText rkType='secondary2 hintColor'>{moment().add(info.item.time, 'seconds').fromNow()}</RkText>
-          </View>
+          </View >
         </RkCard>
       </TouchableOpacity>
     )
   }
 
   render() {
+
     return (
-      <FlatList
-        data={this.state.data.artigos}
-        renderItem={this.renderItem}
-        keyExtractor={this._keyExtractor}
-        style={styles.container}/>
+
+      <Container style={styles.containerFull}>
+        <Header style={styles.headerBg}>
+          <Left 
+          style={styles.headerLogoPascal}
+          >
+            <Image 
+            style={styles.logoHeader} 
+            source={require('../../assets/icons/logoHeader.png')}/>
+          </Left>
+          <Body>
+            <Title>
+            Promoções
+            </Title>
+          </Body>
+          <Right>
+              <Icon 
+              //style={styles.searchHeader}
+              name="ios-search" />
+          </Right>
+        </Header>
+      <View style={styles.container}>
+        <FlatList
+          data={this.data.artigos}
+          renderItem={this.renderItem}
+          keyExtractor={this._keyExtractor}
+          style={styles.containerCard}/>
+      </View>
+      </Container>
+
     )
   }
 }
 
-const styles = StyleSheet.create({
+
+let styles = RkStyleSheet.create(theme => ({
+
+headerBg:{
+  backgroundColor: '#FE7002',
+  borderBottomColor: 'transparent'
+
+},
+  containerFull: {
+    backgroundColor: 'transparent',
+  },
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#FE7002',
+  },
+  // header:{
+  //   height:(Platform.OS === 'ios') ? 70 : 50,
+  //   paddingTop:(Platform.OS === 'ios') ? 50 : 0,
+  //   justifyContent:'center',
+  //   flexDirection: 'row',
+  //   justifyContent: 'space-between',
+  //   alignItems:'center',
+  //   paddingHorizontal: 20,
+  // },
+
+  headerLogoPascal:{
+    maxWidth: 50,
+    maxHeight: 50,
+  },
+
+  logoHeader: {
+    width: (Platform.OS === 'ios') ? 12 : 12,
+    height:(Platform.OS === 'ios') ? 23 : 23,
+    paddingHorizontal: 20,
 
   },
-  cardList: {
-    padding: 20,
+  textHeader: {
+    textAlign: 'center', 
+    flex: 1,
+    color: '#fff',
+    left: 20,
+  },
+  // searchHeader: {
+  //   marginLeft:(Platform.OS === 'ios') ? 30 : 23,
+  // },
+
+  containerCard: {
+    backgroundColor: 'transparent',
+    paddingVertical: 8,
+    paddingHorizontal: 14,
   },
   card: {
-    padding: 20,
-    height: 120,
-    backgroundColor: '#ccc',
-    marginBottom: 20,
-    borderRadius: 5,
+    marginVertical: 8,
   },
-  image: {
-    width:100,
-    height: 20
+  post: {
+    marginTop: 13
   }
-});
+}));

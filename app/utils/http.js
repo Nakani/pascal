@@ -1,18 +1,3 @@
-import * as firebase from 'firebase';
-
-
-const firebaseConfig = {
-  apiKey: "AIzaSyB2-vLuG-sCW2DPAcls04ltwBxNv8sUc_k",
-  authDomain: "pascal-37098.firebaseapp.com",
-  databaseURL: "https://pascal-37098.firebaseio.com",
-  projectId: "pascal-37098",
-  storageBucket: "pascal-37098.appspot.com",
-  messagingSenderId: "22142406102"
-};
-const firebaseApp = firebase.initializeApp(firebaseConfig);
-
-
-
 let HttpService = {
 
     apiURL: 'http://pascal-app.herokuapp.com/api',
