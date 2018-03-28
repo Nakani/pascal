@@ -70,7 +70,7 @@ const PascalApp = StackNavigator({
               <Ionicons
                 name={iconName}
                 size={28}
-                style={{ marginBottom: -3 }}
+                style={{ marginBottom: -3, color: '#ffff' }}
                
               />
             );
@@ -83,6 +83,12 @@ const PascalApp = StackNavigator({
         tabBarPosition: 'bottom',
         animationEnabled: true,
         swipeEnabled: false,
+        tabBarOptions: {
+          style: {
+            backgroundColor: '#FE7002',
+            borderColor: '#FE7002',
+          }
+        }
 
 
       })
