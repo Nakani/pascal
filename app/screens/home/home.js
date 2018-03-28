@@ -49,8 +49,8 @@ export class Home extends React.Component {
         activeOpacity={0.8}
         onPress={() => this.props.navigation.navigate('Article', {id: info.item.id})}
         >
-        <RkCard rkType='horizontal' style={styles.card}>
-          <Image rkCardImg source={info.item.photo}/>
+        <RkCard rkType='horizontal' style={[styles.card, {borderRadius: 10}]}>
+          <Image rkCardImg source={info.item.photo} style={{borderRadius: 10}}/>
 
           <View rkCardContent>
             {/*<RkText numberOfLines={1} rkType='header6'>{this.state.speed}</RkText>*/}
