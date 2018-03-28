@@ -82,8 +82,11 @@ const PascalApp = StackNavigator({
         tabBarComponent: TabBarBottom,
         tabBarPosition: 'bottom',
         animationEnabled: true,
-        swipeEnabled: false,
+        swipeEnabled: true,
         tabBarOptions: {
+          labelStyle: {
+            color: 'brown'
+          },
           style: {
             backgroundColor: '#FE7002',
             borderColor: '#FE7002',
