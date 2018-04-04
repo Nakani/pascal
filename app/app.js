@@ -30,12 +30,18 @@ function getCurrentRouteName(navigationState) {
 }
 
 const PascalApp = StackNavigator({
+  
   First: {
     screen: Screens.Login
   },
+
   Perfil: {
-        screen: Screens.Perfil
-    }, 
+      screen: Screens.Perfil
+  },
+
+  PromoPage: {
+    screen: Screens.PromoPage
+  },
 
   Home: {
     screen: TabNavigator({

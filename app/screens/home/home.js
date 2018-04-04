@@ -18,9 +18,6 @@ import { Container, Button, Text, Header, Left, Body, Title, Right, Icon, Conten
 
 export class Home extends React.Component {
 
-
-
-
   constructor(props) {
     super(props);
     console.ignoredYellowBox = ['Setting a timer'];
@@ -47,7 +44,7 @@ export class Home extends React.Component {
       <TouchableOpacity
         delayPressIn={70}
         activeOpacity={0.8}
-        onPress={() => this.props.navigation.navigate('Article', {id: info.item.id})}
+        onPress={() => this.props.navigation.navigate('PromoPage')}
         >
         <RkCard rkType='horizontal' style={[styles.card, {borderRadius: 10}]}>
           <Image rkCardImg source={info.item.photo} style={{borderRadius: 10}}/>
@@ -58,15 +55,13 @@ export class Home extends React.Component {
             <RkText rkType='secondary6 hintColor'>Pet Shop</RkText>
             <RkText style={styles.post} numberOfLines={2} rkType='secondary1'>{info.item.text}</RkText>
           </View>
-          <View rkCardFooter>
-          </View >
+            <View rkCardFooter />
         </RkCard>
       </TouchableOpacity>
     )
   }
 
   render() {
-
     return (
 
       <Container style={styles.containerFull}>
@@ -101,6 +96,12 @@ export class Home extends React.Component {
     )
   }
 }
+
+
+
+
+
+
 
 
 let styles = RkStyleSheet.create(theme => ({
