@@ -48,7 +48,7 @@ export default class PromoPage extends React.Component {
             </View>
             <View style={{flex: 1, flexDirection: 'row'}}>
               <RkText style={{alignSelf: 'center', fontSize: 14}}>Valido até: </RkText>
-              <RkText style={{alignSelf: 'center', fontSize: 14, color: '#FE7002', fontWeight: 'bold'}}>10/10/2018</RkText>
+              <RkText style={{alignSelf: 'center', fontSize: 14, color: '#E7552C', fontWeight: 'bold'}}>10/10/2018</RkText>
             </View>
           </View>
 
@@ -58,25 +58,25 @@ export default class PromoPage extends React.Component {
           </View>
 
           <View style={{flexDirection: 'row', justifyContent: 'space-between', alignSelf: 'center', marginHorizontal: 5, marginVertical: 5}}>
-            <View style={{backgroundColor: '#FE7002', width: 96, height: 64, borderRadius: 8, marginHorizontal: 5}}>
+            <View style={{backgroundColor: '#E7552C', width: 96, height: 64, borderRadius: 8, marginHorizontal: 5}}>
               <View style={{alignSelf: 'center', backgroundColor: 'rgba(0, 0, 0, 0.3)', borderTopLeftRadius: 10, borderTopRightRadius: 10, width: '100%', marginTop: 0.2}}>
                 <RkText style={{alignSelf: 'center', color: 'white'}}rkType='secondary7'>RESTAM</RkText>
               </View>
-              <RkText style={{alignSelf: 'center', color: 'white', fontWeight: 'bold', fontSize: 24}}>356</RkText>
+              <RkText style={{alignSelf: 'center', color: 'white', fontWeight: 'bold', fontSize: 24, textAlign: 'center'}}>356</RkText>
             </View>
             <View style={{backgroundColor: 'green', width: 96, height: 64, borderRadius: 8, marginHorizontal: 5}}>
               <View style={{alignSelf: 'center', backgroundColor: 'rgba(0, 0, 0, 0.3)', borderTopLeftRadius: 10, borderTopRightRadius: 10, width: '100%', marginTop: 0.2}}>
                 <RkText style={{alignSelf: 'center', color: 'white'}}rkType='secondary7'>DESCONTO</RkText>
               </View>
-              <RkText style={{alignSelf: 'center', color: 'white', fontWeight: 'bold', fontSize: 24}}>40%</RkText>
+              <RkText style={{alignSelf: 'center', color: 'white', fontWeight: 'bold', fontSize: 24, textAlign: 'center'}}>40%</RkText>
             </View>
             <View style={{backgroundColor: 'gray', width: 96, height: 64, borderRadius: 8, marginHorizontal: 5}}>
               <View style={{alignSelf: 'center', backgroundColor: 'rgba(0, 0, 0, 0.3)', borderTopLeftRadius: 10, borderTopRightRadius: 10, width: '100%', marginTop: 0.2}}>
                 <RkText style={{alignSelf: 'center', color: 'white'}}rkType='secondary7'>ROTA</RkText>
               </View>
               <View style={{alignSelf: 'center', flexDirection: 'row'}} >
-                <Icon name="ios-pin-outline" style={{alignSelf: 'center', fontSize: 24, color: 'white', fontWeight: 'bold', marginRight: 1}} />
-                <RkText style={{alignSelf: 'center', color: 'white', fontWeight: 'bold',fontSize: 24}}>1,2km</RkText>
+                <Icon name="ios-pin-outline" style={{alignSelf: 'center', fontSize: 24, color: 'white', fontWeight: 'bold', marginRight: 1, textAlign: 'center'}} />
+                <RkText style={{alignSelf: 'center', color: 'white', fontWeight: 'bold',fontSize: 24, textAlign: 'center'}}>1,2km</RkText>
               </View>
             </View>
           </View>
@@ -94,19 +94,19 @@ export default class PromoPage extends React.Component {
             </RkText>
           </View>
 
-            <TouchableOpacity
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignSelf: 'center',
-                margin: 15, 
-                borderRadius: 10,
-                width: 96,
-                height: 64,
-                backgroundColor: '#5840FF'
-              }}>
-              <RkText style={{alignSelf: 'center', textAlign: 'center', color: 'white', fontWeight: 'bold', fontSize: 24}}>Pegar</RkText>
-            </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignSelf: 'center',
+              margin: 15, 
+              borderRadius: 10,
+              width: '95%',
+              height: 48,
+              backgroundColor: '#FE7002'
+            }}>
+            <RkText style={{alignSelf: 'center', textAlign: 'center', color: 'white', fontWeight: 'bold', fontSize: 24}}>Pegar</RkText>
+          </TouchableOpacity>
 
         </ScrollView>
 

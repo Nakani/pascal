@@ -57,7 +57,7 @@ export class Home extends React.Component {
             <RkText style={styles.post} numberOfLines={2} rkType='secondary1'>{info.item.text}</RkText>
 
             <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-              <View style={{backgroundColor: '#FE7002', width: 64, height: 38, borderRadius: 8}}>
+              <View style={{backgroundColor: '#E7552C', width: 64, height: 38, borderRadius: 8}}>
                 <View style={{alignSelf: 'center', backgroundColor: 'rgba(0, 0, 0, 0.3)', borderTopLeftRadius: 10, borderTopRightRadius: 10, width: '100%', marginTop: 0.2}}>
                   <RkText style={{alignSelf: 'center', color: 'white'}}rkType='secondary7'>RESTAM</RkText>
                 </View>
