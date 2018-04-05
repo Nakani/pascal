@@ -133,6 +133,7 @@ export class Chat extends React.Component {
       // console.log(chat);
       var speech = chat.result.fulfillment.messages[0].speech
       var filter = chat.result.metadata.intentName;
+      console.log(chat.result.metadata);
       var filterClean = filter.split("-");
       switch(filterClean[1]){
         case "banho":
@@ -230,29 +231,7 @@ let styles = RkStyleSheet.create(theme => ({
     flex: 1,
     backgroundColor: '#FE7002',
   },
-  header:{
-    height:(Platform.OS === 'ios') ? 70 : 50,
-    paddingTop:(Platform.OS === 'ios') ? 50 : 0,
-    justifyContent:'center',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems:'center',
-    paddingHorizontal: 20,
-  },
 
-  logoHeader: {
-    width: 20,
-    height: 10,
-
-  },
-  somHeader: {
-    width: 120,
-    height: 10,
-  },
-  searchHeader: {
-    width: 20,
-    height: 15,
-  },
   avatar: {
     marginRight: 16,
   },
@@ -291,12 +270,12 @@ let styles = RkStyleSheet.create(theme => ({
     maxWidth: scale(250),
     padding: 15,
     borderRadius: 20,
-    backgroundColor: '#c3c3c3',
+    backgroundColor: '#331807',
   },
   balloonOut: {
     maxWidth: scale(250),
     padding: 15,
-    backgroundColor: 'transparent',
+    backgroundColor: '#FFAB40',
     borderStyle: 'solid',
     borderWidth: 1,
     borderColor: '#FFAB40',
@@ -306,12 +285,13 @@ let styles = RkStyleSheet.create(theme => ({
     color: '#fff',
   },
   balloonTextOut: {
-    color: '#FFAB40',
+    color: '#fff',
   },
 
   time: {
     alignSelf: 'flex-end',
-    margin: 15
+    margin: 15,
+    color:'#000'
   },
   plus: {
     paddingVertical: 10,
