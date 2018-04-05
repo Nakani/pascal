@@ -120,6 +120,7 @@ const PascalApp = StackNavigator({
           style: {
             backgroundColor: '#FE7002',
             borderColor: '#FE7002',
+            borderRadius: 0.0001,
           }
         }
 
