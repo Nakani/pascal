@@ -57,6 +57,59 @@ export default class PromoPage extends React.Component {
             <RkText rkType='secondary7 hintColor'>Rio Branco, Porto Alegre - RS, 90640-002</RkText>
           </View>
 
+          <View style={{flexDirection: 'row', justifyContent: 'space-between', alignSelf: 'center', marginHorizontal: 5, marginVertical: 5}}>
+            <View style={{backgroundColor: '#FE7002', width: 96, height: 64, borderRadius: 8, marginHorizontal: 5}}>
+              <View style={{alignSelf: 'center', backgroundColor: 'rgba(0, 0, 0, 0.3)', borderTopLeftRadius: 10, borderTopRightRadius: 10, width: '100%', marginTop: 0.2}}>
+                <RkText style={{alignSelf: 'center', color: 'white'}}rkType='secondary7'>RESTAM</RkText>
+              </View>
+              <RkText style={{alignSelf: 'center', color: 'white', fontWeight: 'bold', fontSize: 24}}>356</RkText>
+            </View>
+            <View style={{backgroundColor: 'green', width: 96, height: 64, borderRadius: 8, marginHorizontal: 5}}>
+              <View style={{alignSelf: 'center', backgroundColor: 'rgba(0, 0, 0, 0.3)', borderTopLeftRadius: 10, borderTopRightRadius: 10, width: '100%', marginTop: 0.2}}>
+                <RkText style={{alignSelf: 'center', color: 'white'}}rkType='secondary7'>DESCONTO</RkText>
+              </View>
+              <RkText style={{alignSelf: 'center', color: 'white', fontWeight: 'bold', fontSize: 24}}>40%</RkText>
+            </View>
+            <View style={{backgroundColor: 'gray', width: 96, height: 64, borderRadius: 8, marginHorizontal: 5}}>
+              <View style={{alignSelf: 'center', backgroundColor: 'rgba(0, 0, 0, 0.3)', borderTopLeftRadius: 10, borderTopRightRadius: 10, width: '100%', marginTop: 0.2}}>
+                <RkText style={{alignSelf: 'center', color: 'white'}}rkType='secondary7'>ROTA</RkText>
+              </View>
+              <View style={{alignSelf: 'center', flexDirection: 'row'}} >
+                <Icon name="ios-pin-outline" style={{alignSelf: 'center', fontSize: 24, color: 'white', fontWeight: 'bold', marginRight: 1}} />
+                <RkText style={{alignSelf: 'center', color: 'white', fontWeight: 'bold',fontSize: 24}}>1,2km</RkText>
+              </View>
+            </View>
+          </View>
+
+          <View style={{marginHorizontal: 15}}>
+            <RkText style={styles.post} rkType='header5'>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+              Phasellus tristique urna nec enim iaculis vehicula. 
+              Nullam id urna non velit iaculis rutrum.
+            </RkText>
+            <RkText style={styles.post} rkType='secondary5 hintColor'>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+              Phasellus tristique urna nec enim iaculis vehicula. 
+              Nullam id urna non velit iaculis rutrum.
+            </RkText>
+          </View>
+
+          <View 
+          style={{
+          flexDirection: 'row', 
+          margin: 15, 
+          alignSelf: 'center', 
+          borderRadius: 10,
+          width: 96,
+          height: 64,
+          backgroundColor: 'red'
+          }}>
+
+            <TouchableOpacity style={{alignSelf: 'center'}}>
+              <RkText style={{alignSelf: 'center', color: 'white', fontWeight: 'bold', fontSize: 24}}> Pegar </RkText>
+            </TouchableOpacity>
+
+          </View>
 
         </ScrollView>
 
