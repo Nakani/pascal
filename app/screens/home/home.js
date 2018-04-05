@@ -66,7 +66,7 @@ export class Home extends React.Component {
     return (
 
       <Container style={styles.containerFull}>
-        <PascalHeader title='Promoções'/>
+
       <View style={styles.container}>
         <FlatList
           data={this.data.artigos}

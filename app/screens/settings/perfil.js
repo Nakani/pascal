@@ -60,7 +60,6 @@ export class Perfil extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <PascalHeader title='Perfil'/>
     <ScrollView style={styles.root}>
       <RkAvoidKeyboard>
         <View style={styles.containerPerfil}>

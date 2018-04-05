@@ -196,7 +196,6 @@ export class Chat extends React.Component {
       <RkAvoidKeyboard style={styles.container} onResponderRelease={(event) => {
         Keyboard.dismiss();
       }}>      
-        <PascalHeader title='Chat'/>
 
         <FlatList ref='list'
                   extraData={this.state}

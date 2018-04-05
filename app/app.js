@@ -8,12 +8,17 @@ import {bootstrap} from './config/bootstrap';
 import {AppRoutes} from './config/navigation/routesBuilder';
 import * as Screens from './screens';
 import { Font } from 'expo';
-import {StatusBar} from "react-native";
+import {StatusBar,   TouchableOpacity,} from "react-native";
 import { Ionicons } from '@expo/vector-icons';
 import {data} from './data';
 
 import { Platform } from 'react-native';
-
+import PascalHeader from './utils/pascalHeader';
+import { Container, Button, Text, Header, Left, Body, Title, Right, Icon, Content} from "native-base";
+import {
+  RkText,
+  RkCard, RkStyleSheet
+} from 'react-native-ui-kitten';
 
 bootstrap();
 //data.createSQLite();
@@ -40,7 +45,26 @@ const PascalApp = StackNavigator({
   },
 
   PromoPage: {
-    screen: Screens.PromoPage
+    screen: Screens.PromoPage,
+    navigationOptions: ({ navigation }) => ({
+      header: ({focused}) => {
+        return (
+        <Header style={styles.headerBg}>
+          <Left 
+            style={styles.headerLogoPascal}
+          >
+          <TouchableOpacity style={{width: 30, height: 30}} onPress={() => navigation.goBack()}>
+            <Icon 
+              name="ios-arrow-back"/>
+            </TouchableOpacity>
+          </Left>
+          <Body>
+            <Title style={{color: 'black', fontWeight: 'bold'}}>PETSHOT BANZÉ</Title>
+          </Body>
+        </Header>
+        );
+      }
+    }),
   },
 
   Home: {
@@ -81,7 +105,7 @@ const PascalApp = StackNavigator({
               />
             );
           },
-
+          header: ({focused}) => <PascalHeader title={navigation.state.routeName} />,
         }
 
         ),
@@ -103,7 +127,7 @@ const PascalApp = StackNavigator({
       })
   }
 }, {
-  headerMode: 'none',
+  headerMode: 'float',
   headerStyle: {
   shadowOpacity: 0,
   elevation: 0,
@@ -157,3 +181,67 @@ export default class App extends React.Component{
         );
     }
 }
+
+
+let styles = RkStyleSheet.create(theme => ({
+
+headerBg:{
+  backgroundColor: '#FE7002',
+  borderBottomColor: 'transparent'
+
+},
+  containerFull: {
+    backgroundColor: 'transparent',
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#FE7002',
+  },
+  // header:{
+  //   height:(Platform.OS === 'ios') ? 70 : 50,
+  //   paddingTop:(Platform.OS === 'ios') ? 50 : 0,
+  //   justifyContent:'center',
+  //   flexDirection: 'row',
+  //   justifyContent: 'space-between',
+  //   alignItems:'center',
+  //   paddingHorizontal: 20,
+  // },
+
+  headerLogoPascal:{
+    maxWidth: 50,
+    maxHeight: 50,
+  },
+
+  logoHeader: {
+    width: (Platform.OS === 'ios') ? 12 : 12,
+    height:(Platform.OS === 'ios') ? 23 : 23,
+    paddingHorizontal: 20,
+
+  },
+  textHeader: {
+    textAlign: 'center', 
+    flex: 1,
+    color: '#fff',
+    left: 20,
+  },
+  // searchHeader: {
+  //   marginLeft:(Platform.OS === 'ios') ? 30 : 23,
+  // },
+
+  containerCard: {
+    backgroundColor: 'transparent',
+    paddingVertical: 8,
+    paddingHorizontal: 14,
+  },
+  card: {
+    marginVertical: 8,
+  },
+  post: {
+    marginTop: 13
+  }
+}));
+
+
+
+
+

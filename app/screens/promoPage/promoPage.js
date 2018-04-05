@@ -25,19 +25,6 @@ export default class PromoPage extends React.Component {
   render() {
     return (
       <Container style={styles.containerFull}>
-        <Header style={styles.headerBg}>
-          <Left 
-            style={styles.headerLogoPascal}
-          >
-          <TouchableOpacity style={{width: 30, height: 30}} onPress={() => this.props.navigation.goBack()}>
-            <Icon 
-              name="ios-arrow-back"/>
-            </TouchableOpacity>
-          </Left>
-          <Body>
-            <Title style={{color: 'black', fontWeight: 'bold'}}>PETSHOT BANZÉ</Title>
-          </Body>
-        </Header>
 
         <ScrollView >
 

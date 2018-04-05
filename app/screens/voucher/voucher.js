@@ -97,8 +97,7 @@ export class Voucher extends React.Component {
 render() {
     return (
       <View style={styles.container}>
-        
-        <PascalHeader title='Vouchers'/>
+      
 
         <FlatList style={styles.list}
                   showsVerticalScrollIndicator={false}
