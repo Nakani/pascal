@@ -191,8 +191,6 @@ export class Chat extends React.Component {
 
   render() {
     return (
-
-
       <RkAvoidKeyboard style={styles.container} onResponderRelease={(event) => {
         Keyboard.dismiss();
       }}>      
@@ -254,9 +252,6 @@ let styles = RkStyleSheet.create(theme => ({
     width: 20,
     height: 15,
   },
-
-
-  
   avatar: {
     marginRight: 16,
   },
@@ -304,7 +299,7 @@ let styles = RkStyleSheet.create(theme => ({
     borderStyle: 'solid',
     borderWidth: 1,
     borderColor: '#FFAB40',
-    borderTopRightRadius: 20,  
+    borderRadius: 20,  
   },
   balloonTextIn: {
     color: '#fff',
