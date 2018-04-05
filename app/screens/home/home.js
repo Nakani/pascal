@@ -14,6 +14,7 @@ import {data} from '../../data';
 import { Constants, LinearGradient } from 'expo';
 import { FirebaseApp } from '../../utils/firebase-app';
 import { Container, Button, Text, Header, Left, Body, Title, Right, Icon, Content} from "native-base";
+import PascalHeader from '../../utils/pascalHeader';
 
 
 export class Home extends React.Component {
@@ -65,25 +66,7 @@ export class Home extends React.Component {
     return (
 
       <Container style={styles.containerFull}>
-        <Header style={styles.headerBg}>
-          <Left 
-          style={styles.headerLogoPascal}
-          >
-            <Image 
-            style={styles.logoHeader} 
-            source={require('../../assets/icons/logoHeader.png')}/>
-          </Left>
-          <Body>
-            <Title>
-            Promoções
-            </Title>
-          </Body>
-          <Right>
-              <Icon 
-              //style={styles.searchHeader}
-              name="ios-search" />
-          </Right>
-        </Header>
+        <PascalHeader title='Promoções'/>
       <View style={styles.container}>
         <FlatList
           data={this.data.artigos}

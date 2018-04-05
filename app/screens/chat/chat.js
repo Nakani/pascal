@@ -25,6 +25,7 @@ import {scale} from '../../utils/scale';
 import {data} from '../../data';
 import HttpService from "../../utils/http";
 import { Constants, LinearGradient } from 'expo';
+import PascalHeader from '../../utils/pascalHeader';
 
 let moment = require('moment');
 
@@ -195,16 +196,7 @@ export class Chat extends React.Component {
       <RkAvoidKeyboard style={styles.container} onResponderRelease={(event) => {
         Keyboard.dismiss();
       }}>      
-        <LinearGradient colors={['#FBB843','#FE7709']}
-                  start={{x: 0.0, y: 0.5}}
-                  end={{x: 1, y: 0.5}}
-                  >
-          <View style={styles.header}>
-            <Image style={styles.logoHeader} source={require('../../assets/icons/logoHeader.png')}/>
-            <Image style={styles.somHeader} source={require('../../assets/icons/somHeader.png')}/>
-            <Image style={styles.searchHeader} source={require('../../assets/icons/lupaHeader.png')}/>
-          </View>
-        </LinearGradient>
+        <PascalHeader title='Chat'/>
 
         <FlatList ref='list'
                   extraData={this.state}

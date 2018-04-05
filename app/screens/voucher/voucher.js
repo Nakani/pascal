@@ -20,7 +20,7 @@ import {data} from '../../data';
 
 import {scale, scaleModerate, scaleVertical} from '../../utils/scale';
 import { Constants, LinearGradient } from 'expo';
-
+import PascalHeader from '../../utils/pascalHeader';
 
 export class Voucher extends React.Component {
 
@@ -97,16 +97,8 @@ export class Voucher extends React.Component {
 render() {
     return (
       <View style={styles.container}>
-          <LinearGradient colors={['#FBB843','#FE7709']}
-                    start={{x: 0.0, y: 0.5}}
-                    end={{x: 1, y: 0.5}}
-                    >
-            <View style={styles.header}>
-              <Image style={styles.logoHeader} source={require('../../assets/icons/logoHeader.png')}/>
-              <Image style={styles.somHeader} source={require('../../assets/icons/somHeader.png')}/>
-              <Image style={styles.searchHeader} source={require('../../assets/icons/lupaHeader.png')}/>
-            </View>
-          </LinearGradient>
+        
+        <PascalHeader title='Vouchers'/>
 
         <FlatList style={styles.list}
                   showsVerticalScrollIndicator={false}
