@@ -156,7 +156,7 @@ export default class App extends React.Component{
         realm: null
     };
     async componentDidMount() {
-      StatusBar.setHidden(true);
+      StatusBar.setHidden(false);
         Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT);
         await Font.loadAsync({
             'Roboto-Regular': require('./assets/fonts/Roboto-Regular.ttf'),
