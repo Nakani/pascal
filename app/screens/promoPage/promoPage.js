@@ -95,18 +95,19 @@ export default class PromoPage extends React.Component {
           </View>
 
           <View 
-          style={{
-          flexDirection: 'row', 
-          margin: 15, 
-          alignSelf: 'center', 
-          borderRadius: 10,
-          width: 96,
-          height: 64,
-          backgroundColor: 'red'
-          }}>
+            style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignSelf: 'center',
+            margin: 15, 
+            borderRadius: 10,
+            width: 96,
+            height: 64,
+            backgroundColor: '#5840FF'
+            }}>
 
-            <TouchableOpacity style={{alignSelf: 'center'}}>
-              <RkText style={{alignSelf: 'center', color: 'white', fontWeight: 'bold', fontSize: 24}}> Pegar </RkText>
+            <TouchableOpacity>
+              <RkText style={{alignSelf: 'center', color: 'white', fontWeight: 'bold', fontSize: 24}}>Pegar</RkText>
             </TouchableOpacity>
 
           </View>
