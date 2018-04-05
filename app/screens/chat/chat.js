@@ -131,6 +131,7 @@ export class Chat extends React.Component {
     });
     if(chat){
       // console.log(chat);
+      var speech = chat.result.fulfillment.messages[0].speech
       var filter = chat.result.metadata.intentName;
       var filterClean = filter.split("-");
       switch(filterClean[1]){
@@ -145,7 +146,7 @@ export class Chat extends React.Component {
       id: chat.id,
       time: 0,
       type: 'in',
-      text: chat.result.fulfillment.messages[0].speech
+      text: speech
     };
     let data = this.state.data;
       data.messages.push(msgOut);
@@ -227,7 +228,7 @@ let styles = RkStyleSheet.create(theme => ({
 
   container: {
     flex: 1,
-    backgroundColor: theme.colors.screen.base,
+    backgroundColor: '#FE7002',
   },
   header:{
     height:(Platform.OS === 'ios') ? 70 : 50,
