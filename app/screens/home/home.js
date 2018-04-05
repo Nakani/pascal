@@ -47,7 +47,7 @@ export class Home extends React.Component {
         activeOpacity={0.8}
         onPress={() => this.props.navigation.navigate('PromoPage')}
         >
-        <RkCard rkType='horizontal' style={[styles.card, {borderRadius: 10}]}>
+        <RkCard rkType='horizontal' style={[styles.card, {borderRadius: 10, height: 128}]}>
           <Image rkCardImg source={info.item.photo} style={{borderRadius: 10}}/>
 
           <View rkCardContent>
@@ -55,6 +55,22 @@ export class Home extends React.Component {
             <RkText numberOfLines={1} rkType='header6'>{info.item.header}</RkText>
             <RkText rkType='secondary6 hintColor'>Pet Shop</RkText>
             <RkText style={styles.post} numberOfLines={2} rkType='secondary1'>{info.item.text}</RkText>
+
+            <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+              <View style={{backgroundColor: '#FE7002', width: 64, height: 38, borderRadius: 8}}>
+                <View style={{alignSelf: 'center', backgroundColor: 'rgba(0, 0, 0, 0.3)', borderTopLeftRadius: 10, borderTopRightRadius: 10, width: '100%', marginTop: 0.2}}>
+                  <RkText style={{alignSelf: 'center', color: 'white'}}rkType='secondary7'>RESTAM</RkText>
+                </View>
+                <RkText style={{alignSelf: 'center', color: 'white', fontWeight: 'bold'}} rkType='secondary1'>356</RkText>
+              </View>
+              <View style={{backgroundColor: 'green', width: 64, height: 38, borderRadius: 8}}>
+                <View style={{alignSelf: 'center', backgroundColor: 'rgba(0, 0, 0, 0.3)', borderTopLeftRadius: 10, borderTopRightRadius: 10, width: '100%', marginTop: 0.2}}>
+                  <RkText style={{alignSelf: 'center', color: 'white'}}rkType='secondary7'>DESCONTO</RkText>
+                </View>
+                <RkText style={{alignSelf: 'center', color: 'white', fontWeight: 'bold'}} rkType='secondary1'>40%</RkText>
+              </View>
+            </View>
+
           </View>
             <View rkCardFooter />
         </RkCard>
